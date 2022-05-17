@@ -1,5 +1,9 @@
-export default function Footer(){
+import './footer.css';
+export default function Footer() {
     return (
-        <h1>filme escolhido aqui</h1>
+        <div className='div'>
+            <img src="" alt="capa-do-filme" />
+            <p>Nome do filme</p>
+        </ div>
     )
 }

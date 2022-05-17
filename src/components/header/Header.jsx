@@ -1,5 +1,7 @@
+import "./header.css";
+
 export default function Header(){
     return(
-        <>CINEFLEX</>
+        <header className="div">CINEFLEX</header>
     )
 }
