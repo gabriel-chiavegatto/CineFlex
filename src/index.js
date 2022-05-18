@@ -1,16 +1,15 @@
 import ReactDom from "react-dom";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import Header from "./components/Header";
 import Main from "./components/main/Main";
-import './assets/reset.css';
-import './assets/style-root.css'
+import './assets/css/reset.css';
+import './assets/css/style-root.css';
+
 
 function App() {
     return (
         <>
             <Header />
             <Main />
-            <Footer />
         </>
     )
 }
