@@ -17,8 +17,15 @@ export default function Footer() {
 
 const YourSession = styled.div`
 
-    width: 100%;
-    display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 117px;
+        background: #DFE6ED;
+        border: 1px solid #9EADBA;
+        display: flex;
+        align-items: center;
 
     section{
         width: 64px;
