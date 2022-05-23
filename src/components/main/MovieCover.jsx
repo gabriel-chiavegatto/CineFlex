@@ -1,9 +1,14 @@
-import Capa from '../../assets/images/image-capa3.png';
 import styled from 'styled-components';
-export default function MovieCover() {
+import { Link } from 'react-router-dom';
+
+
+export default function MovieCover(props) {
+    const { capa } = props;
     return (
         <Cartaz>
-            <img src={Capa} alt="coverId" />
+            <Link to="/sessoes/:idFilme">
+                <img src={capa} alt="coverId" />
+            </Link>
         </Cartaz>
     )
 }

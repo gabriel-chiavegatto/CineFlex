@@ -1,16 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
 import MovieCover from "./MovieCover";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 export default function Main() {
+
+    const [lista, setLista] = useState(false);
+
+    useEffect(() => {
+        const requisicao = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
+
+        requisicao.then(resposta => {
+            console.log(resposta.data);
+            setLista(resposta.data);
+        });
+        requisicao.catch(resposta => {
+            alert('ERRO NA REQUISIÇÃO DA API');
+            console.log(resposta);
+        });
+    }, []);
+
     return (
 
         <Container>
             <div>
                 <header>Selecione o filme</header>
                 <section className="catalogo-de-filmes">
-                    <div><MovieCover /></div>
+                    {(lista !== false) ?
+                        (lista.map(item =>
+                            <div><MovieCover capa={item.posterURL} key={item.id} /></div>
+                        )) :
+                        (<h1>LOADING</h1>)
+                    }
                 </section>
             </div>
         </Container>
@@ -41,5 +64,11 @@ const Container = styled.main`
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+    }
+    h1{
+        font-size: 50px;
+        width: 100%;
+        text-align: center;
+        color: #293845;
     }
 `;
