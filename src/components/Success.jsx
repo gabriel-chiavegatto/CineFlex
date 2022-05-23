@@ -1,28 +1,53 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Loading from './Loading';
 
-export default function Success(){
+export default function Success(props) {
+    const { reserva, detalhes } = props;
+    console.log(detalhes);
+
+    const [sucesso, setSucesso] = useState(false);
+
+    useEffect(() => {
+        console.log('tentando postar...')
+        const post = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', reserva);
+        post.then(() => {
+            console.log('postou');
+            setSucesso(true);
+        });
+        post.catch(() => alert('ERRO NA RESERVA, TENTE NOVAMENTE'));
+    }, []);
+
     return (
+
         <Container>
-            <div>
-                <header>Pedido feito com sucesso!</header>
-                <section>
-                    <h1> Filmes e sessão</h1>
-                    <p>nomeFilmexxxxxx</p>
-                    <p>dataHorarioXXXXXX</p>
-                </section>
-                <section>
-                <h1> Ingressos</h1>
-                    <p>Assento x</p>
-                    <p>Assento Y</p>
-                </section>
-                <section>
-                <h1> Comprador</h1>
-                    <p>Nome: Fulano</p>
-                    <p>CPF: xxxxx</p>
-                </section>
-                <article><button>Voltar pra Home</button></article>
-                              
-            </div>
+            {(sucesso) ?
+                (<div>
+                    <header>Pedido feito com sucesso!</header>
+                    <section>
+                        <h1> Filmes e sessão</h1>
+                        <p>{detalhes.title}</p>
+                        <p>{detalhes.day} {detalhes.time}</p>
+                    </section>
+                    <section>
+                        <h1> Ingressos</h1>
+                        {detalhes.numSeats.map(item => {
+                            return (<p>Assento {item}</p>)
+                        })}
+                    </section>
+                    <section>
+                        <h1> Comprador</h1>
+                        <p>Nome: {reserva.name}</p>
+                        <p>CPF: {reserva.cpf}</p>
+                    </section>
+                    <article><Link to="/"><button>Voltar pra Home</button></Link></article>
+
+                </div>) :
+                (<Loading />)
+
+            }
         </Container>
     )
 }
@@ -32,6 +57,7 @@ const Container = styled.main`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 120px;
 
     header{
         width: 100%;

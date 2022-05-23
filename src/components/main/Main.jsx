@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MovieCover from "./MovieCover";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Loading from '../Loading';
 
 
 export default function Main() {
@@ -31,7 +32,7 @@ export default function Main() {
                         (lista.map((item, index) =>
                             <div><MovieCover capa={item.posterURL} id={item.id} key={index} /></div>
                         )) :
-                        (<h1>LOADING</h1>)
+                        (<Loading />)
                     }
                 </section>
             </div>
@@ -45,6 +46,7 @@ const Container = styled.main`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 120px;
 
     header{
         height: 100px;

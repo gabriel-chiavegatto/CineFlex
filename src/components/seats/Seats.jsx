@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import Footer from '../Footer';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import EachSeat from './EachSeat';
 import axios from 'axios';
 import Forms from './Forms';
+import Loading from '../Loading';
 
 
-export default function Seats() {
+export default function Seats(props) {
 
+    const {setReserva, setDetalhes} = props;
+
+    const [nameUser, setNameUser] = useState('');
+    const [cpfUser, setCpfUser] = useState('');
+    const [numSeats, setNumSeats] = useState([]);
     const { idSessao } = useParams();
     const [lista3, setLista3] = useState([]);
     const [title, setTitle] = useState("");
@@ -21,8 +27,6 @@ export default function Seats() {
     useEffect(() => {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
         promisse.then(resposta => {
-            console.log(resposta);
-            console.log(resposta.data.seats);
             setLista3(resposta.data.seats);
             setTitle(resposta.data.movie.title);
             setDay(resposta.data.day.weekday);
@@ -41,10 +45,10 @@ export default function Seats() {
                 <header>Selecione o(s) assento(s)</header>
                 <section>
                     {(lista3 === "") ?
-                        (<></>) :
+                        (<Loading />) :
                         (lista3.map(seat => {
                             return (
-                                <EachSeat id={seat.id} num={seat.name} status={seat.isAvailable} key={seat.id} mySeats={mySeats} setMySeats={setMySeats}/>
+                                <EachSeat id={seat.id} num={seat.name} status={seat.isAvailable} key={seat.id} mySeats={mySeats} setMySeats={setMySeats} numSeats={numSeats} setNumSeats={setNumSeats}/>
                             )
                         }))
                     }
@@ -63,19 +67,36 @@ export default function Seats() {
                         <p>Indisponível</p>
                     </div>
                 </Examples>
-                <Forms />
-                <div className='reservar'><button>Reservar assento(s)</button></div>
+                <Forms nameUser={nameUser} setNameUser={setNameUser} cpfUser={cpfUser} setCpfUser={setCpfUser}/>
+                <div className='reservar'><Link to='/success'><button onClick={reservarAssentos}>Reservar assento(s)</button></Link></div>
                 <Footer title={title} poster={poster} day={day} showTime={time} />
             </div>
         </Container>
     )
+
+    function reservarAssentos() {
+        console.log('reservando....');
+        if(cpfUser !== '' && nameUser!=='' && mySeats.length>0){
+            setReserva({
+                ids: mySeats,
+                name: nameUser,
+                cpf: cpfUser
+            });
+            setDetalhes({
+                title,
+                day,
+                time,
+                numSeats
+            });
+        } else{alert('Para prosseguir preencha os dados corretamente')}
+    }
 }
 const Container = styled.main`
 
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-bottom: 117px;
+    padding-bottom: 120px;
     
     .centralize{
         width: 334px;

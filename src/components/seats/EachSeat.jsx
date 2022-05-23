@@ -1,17 +1,15 @@
-import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import styled from 'styled-components';
 
 export default function EachSeat(props) {
-    const { id, num, status, mySeats, setMySeats } = props;
-    console.log(mySeats);
+    const { id, num, status, mySeats, setMySeats, numSeats, setNumSeats} = props;
     const [selected, setSelected] = useState(false);
     const [background, setBackground] = useState('#C3CFD9');
     const [border, setBorder] = useState('#808F9D');
 
     if (status === false) {
         return (
-            <Seat className="indisponivel">{num}</Seat>
+            <Seat className="indisponivel" onClick={() => alert('ESTE ASSENTO NÃO ESTÁ DISPONÍVEL')}>{num}</Seat>
         )
     }
 
@@ -22,29 +20,28 @@ export default function EachSeat(props) {
     </ >)
 
     function toggleColors() {
-        console.log(mySeats);
         if (!selected) {
             setSelected(true);
             setBackground('#8DD7CF');
             setBorder('#1AAE9E');
-            console.log('antes de add', mySeats);
-            setMySeats(() => {
-                mySeats.push(id)
-                return mySeats;
-            });
-            console.log('depois de add', mySeats);
+            setMySeats([...mySeats, id]);
+            setNumSeats([...numSeats, num]);
         } else {
             setSelected(false);
             setBackground('#C3CFD9');
             setBorder('#808F9D');
             setMySeats(() => {
                 const filtered = mySeats.filter(item => {
-                    if (item != id) {
-                        return item;
-                    }
+                    return (item !== id);
                 });
                 return filtered;
             });
+            setNumSeats(()=>{
+                const filtered = numSeats.filter(item =>{
+                    return (item !== num)
+                });
+                return filtered;
+            })
         }
     }
 }

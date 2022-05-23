@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function Forms() {
+export default function Forms(props) {
+
+    const {nameUser, setNameUser, cpfUser, setCpfUser} = props;
+    
+
     return (
         <ConteinerForms>
             <h2>Nome do comprador:</h2>
-            <input placeholder='Digite seu nome...' />
+            <input placeholder='Digite seu nome...' onChange={event => setNameUser(event.target.value)} value={nameUser} />
             <h2>CPF do comprador:</h2>
-            <input placeholder='Digite seu CPF...' />
+            <input placeholder='Digite seu CPF...' onChange={e => setCpfUser(e.target.value)} value={cpfUser} />
         </ConteinerForms>
     )
 }

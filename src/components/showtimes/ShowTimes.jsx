@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Loading from "../Loading";
 
 export default function ShowTimes() {
 
@@ -28,7 +29,7 @@ export default function ShowTimes() {
 
     if (sessoes === false) {
         return (
-            <h1>LOADING</h1>
+            <Loading />
         )
     }
 
@@ -45,12 +46,6 @@ export default function ShowTimes() {
                             })}
                         </section>)
                 })}
-
-                <section>
-                    <h1>Horario1-taldia-talhora</h1>
-                    <button>hora1</button>
-                    <button>hora2</button>
-                </section>
             </div>
 
             <Footer title={title} poster={poster}/>
@@ -62,6 +57,7 @@ const Container = styled.main`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 120px;
 
     .centralize{
         width: 325px;

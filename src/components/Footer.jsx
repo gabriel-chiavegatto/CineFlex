@@ -22,7 +22,7 @@ const YourSession = styled.div`
         left: 0;
         width: 100%;
         height: 117px;
-        background: rgba(223, 230, 237, .7);
+        background: rgba(223, 230, 237, .85);
         border: 1px solid #9EADBA;
         display: flex;
         align-items: center;
