@@ -7,10 +7,6 @@ import Seats from './components/seats/Seats';
 import Success from './components/Success';
 
 
-// const [capas, setCapas] = React.useState('');
-
-
-
 export default function App() {
 
 

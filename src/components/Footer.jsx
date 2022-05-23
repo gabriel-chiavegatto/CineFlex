@@ -22,7 +22,7 @@ const YourSession = styled.div`
         left: 0;
         width: 100%;
         height: 117px;
-        background: #DFE6ED;
+        background: rgba(223, 230, 237, .7);
         border: 1px solid #9EADBA;
         display: flex;
         align-items: center;
@@ -47,6 +47,7 @@ const YourSession = styled.div`
         align-items: center;
         font-size: 26px;
         line-height: 30px;
+        padding: 0 0 0 0;
         color: #293845;
     }
 

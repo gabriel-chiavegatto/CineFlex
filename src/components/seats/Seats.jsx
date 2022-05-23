@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import EachSeat from './EachSeat';
 import axios from 'axios';
+import Forms from './Forms';
 
 
 export default function Seats() {
@@ -61,12 +62,8 @@ export default function Seats() {
                         <p>Indisponível</p>
                     </div>
                 </Examples>
-                <Forms>
-                    <h2>Nome do comprador:</h2>
-                    <input placeholder='Digite seu nome...' />
-                    <h2>CPF do comprador:</h2>
-                    <input placeholder='Digite seu CPF...' />
-                </Forms>
+                <Forms />
+                <div className='reservar'><button>Reservar assento(s)</button></div>
                 <Footer title={title} poster={poster} day={day} showTime={time} />
             </div>
         </Container>
@@ -77,6 +74,7 @@ const Container = styled.main`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 117px;
     
     .centralize{
         width: 334px;
@@ -97,25 +95,36 @@ const Container = styled.main`
         display: flex;
         flex-wrap: wrap;
     }
-    button{
-        width: 26px;
-        height: 26px;
+    .disponivel{
         background: #C3CFD9;
         border: 1px solid #808F9D;
-        border-radius: 12px;
-        margin: 0 3.5px 16px 3.5px;
-        :hover{
-            cursor: pointer;
-        }
-    }
-    
-    .selecionado{
-        background: #8DD7CF;
-        border: 1px solid #1AAE9E;
     }
     .indisponivel{
         background: #FBE192;
         border: 1px solid #F7C52B;
+    }
+    .selecionado{
+        background: #8DD7CF;
+        border: 1px solid #1AAE9E;
+    }
+
+    .reservar{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        button{
+            width: 225px;
+            height: 42px;
+            background: #E8833A;
+            border-radius: 3px;
+            font-size: 18px;
+            line-height: 21px;
+            letter-spacing: 0.04em;
+            color: #FFFFFF;
+            border: none;
+            
+        }
     }
 
 `;
@@ -131,25 +140,9 @@ const Examples = styled.section`
     }
     button{
         margin-bottom: 3px;
-    }
-`;
-const Forms = styled.section`
-    margin-top: 42px;
-    h2{
-        font-size: 18px;
-        line-height: 21px;
-        color: #293845;
-    }
-    input{
-        width: 327px;
-        height: 51px;   
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
-        border-radius: 3px;
-        font-size: 18px;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        color: #AFAFAF;
+        width: 26px;
+        height: 26px;
+        border-radius: 12px;
+        margin: 0 3.5px 16px 3.5px;
     }
 `;
