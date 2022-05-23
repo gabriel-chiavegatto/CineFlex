@@ -15,6 +15,7 @@ export default function Seats() {
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
     const [poster, setPoster] = useState("");
+    const [mySeats, setMySeats] = useState([]);
     // const [seat, setSeat] = useState(false);
 
     useEffect(() => {
@@ -43,7 +44,7 @@ export default function Seats() {
                         (<></>) :
                         (lista3.map(seat => {
                             return (
-                                <EachSeat id={seat.id} num={seat.name} status={seat.isAvailable} key={seat.id} />
+                                <EachSeat id={seat.id} num={seat.name} status={seat.isAvailable} key={seat.id} mySeats={mySeats} setMySeats={setMySeats}/>
                             )
                         }))
                     }
