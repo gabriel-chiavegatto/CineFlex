@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import IMGtest from '../../assets/images/image-capa3.png';
-export default function Footer() {
+export default function Footer(props) {
+    const { title, poster, day, showTime } = props;
     return (
         <YourSession>
 
-            <section> <img src={IMGtest} alt='capa-escolhida' /> </section>
+            <section> <img src={poster} alt='capa-escolhida' /> </section>
             <article>
                 <div>
-                    <p>nomeDUfilme</p>
-                    <p>dia&hora</p>
+                    <p>{title}</p>
+                    <p>{day}{showTime}</p>
                 </div>
             </article>
         </ YourSession>

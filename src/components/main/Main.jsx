@@ -13,7 +13,6 @@ export default function Main() {
         const requisicao = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
 
         requisicao.then(resposta => {
-            console.log(resposta.data);
             setLista(resposta.data);
         });
         requisicao.catch(resposta => {
@@ -29,8 +28,8 @@ export default function Main() {
                 <header>Selecione o filme</header>
                 <section className="catalogo-de-filmes">
                     {(lista !== false) ?
-                        (lista.map(item =>
-                            <div><MovieCover capa={item.posterURL} key={item.id} /></div>
+                        (lista.map((item, index) =>
+                            <div><MovieCover capa={item.posterURL} id={item.id} key={index} /></div>
                         )) :
                         (<h1>LOADING</h1>)
                     }

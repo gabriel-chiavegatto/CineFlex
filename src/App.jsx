@@ -2,8 +2,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import Main from "./components/main/Main";
-import ShowTimes from './components/ShowTimes.jsx';
-import Seats from './components/main/Seats';
+import ShowTimes from './components/showtimes/ShowTimes.jsx';
+import Seats from './components/seats/Seats';
 import Success from './components/Success';
 
 

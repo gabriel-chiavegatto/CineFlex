@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 
 export default function MovieCover(props) {
-    const { capa } = props;
+    const { capa, id} = props;
     return (
         <Cartaz>
-            <Link to="/sessoes/:idFilme">
+            <Link to={`/sessoes/${id}`}>
                 <img src={capa} alt="coverId" />
             </Link>
         </Cartaz>
